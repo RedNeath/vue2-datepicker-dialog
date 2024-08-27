@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 # Check current branch
 if test "master" != "$(git symbolic-ref --short HEAD)"; then
