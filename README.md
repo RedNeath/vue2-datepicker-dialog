@@ -1,17 +1,27 @@
+[original_datepicker]: [https://github.com/mengxiong10/vue2-datepicker]
+[mdn_dialog]: [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog]
+
+# Fork notes
+This repository is forked from [mengxiong10/vue2-datepicker][original_datepicker]. It was created because the datepicker popup doesn't comply with the [*new* HTML `<dialog>` tag][mdn_dialog] added in 2022.
+
+When using the aforementioned tag, the popup would appear behind the dialog, and thus be basically invisible.
+
+This implementation corrects this behaviour.
+
 # vue2-datepicker
 
 [中文版](https://github.com/mengxiong10/vue2-datepicker/blob/master/README.zh-CN.md)
 
 > A Datepicker Component For Vue2
 
-<a href="https://travis-ci.org/mengxiong10/vue2-datepicker">
-  <img src="https://travis-ci.org/mengxiong10/vue2-datepicker.svg?branch=master" alt="build:passed">
+<a href="https://travis-ci.org/RedNeath/vue2-datepicker-dialog">
+  <img src="https://travis-ci.org/RedNeath/vue2-datepicker-dialog.svg?branch=master" alt="build:passed">
 </a>
-<a href="https://coveralls.io/github/mengxiong10/vue2-datepicker">
-  <img src="https://coveralls.io/repos/github/mengxiong10/vue2-datepicker/badge.svg?branch=master&service=github" alt="Badge">
+<a href="https://coveralls.io/github/RedNeath/vue2-datepicker-dialog">
+  <img src="https://coveralls.io/repos/github/RedNeath/vue2-datepicker-dialog/badge.svg?branch=master&service=github" alt="Badge">
 </a>
-<a href="https://www.npmjs.com/package/vue2-datepicker">
-  <img src="https://img.shields.io/npm/v/vue2-datepicker.svg" alt="npm">
+<a href="https://www.npmjs.com/package/vue2-datepicker-dialog">
+  <img src="https://img.shields.io/npm/v/vue2-datepicker-dialog.svg" alt="npm">
 </a>
 <a href="LICENSE">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT">
@@ -21,9 +31,9 @@
 
 ## Demo
 
-<https://mengxiong10.github.io/vue2-datepicker/index.html>
+<https://redneath.github.io/vue2-datepicker-dialog/index.html>
 
-![image](https://github.com/mengxiong10/vue2-datepicker/raw/master/screenshot/demo.png)
+![image](https://github.com/RedNeath/vue2-datepicker-dialog/raw/master/screenshot/demo.png)
 
 ## Install
 
@@ -88,7 +98,7 @@ import 'vue2-datepicker/locale/zh-cn';
 ```
 
 You can also override some of the default locale by `lang`.
-[Full config](https://github.com/mengxiong10/vue2-datepicker/blob/master/locale.md)
+[Full config](https://github.com/RedNeath/vue2-datepicker-dialog/blob/master/locale.md)
 
 ```html
 <script>
@@ -113,52 +123,53 @@ You can also override some of the default locale by `lang`.
 
 ### Props
 
-| Prop                | Description                                      | Type                                            | Default        |
-| ------------------- | ------------------------------------------------ | ----------------------------------------------- | -------------- |
-| type                | select the type of picker                        | date \|datetime\|year\|month\|time\|week        | 'date'         |
-| range               | if true, pick the range date                     | `boolean`                                       | false          |
-| format              | to set the date format. similar to moment.js     | [token](#token)                                 | 'YYYY-MM-DD'   |
-| formatter           | use your own formatter, such as moment.js        | [object](#formatter)                            | -              |
-| value-type          | data type of the binding value                   | [value-type](#value-type)                       | 'date'         |
-| default-value       | default date of the calendar                     | `Date`                                          | new Date()     |
-| lang                | override the default locale                      | `object`                                        |                |
-| placeholder         | input placeholder text                           | `string`                                        | ''             |
-| editable            | whether the input is editable                    | `boolean`                                       | true           |
-| clearable           | if false, don't show the clear icon              | `boolean`                                       | true           |
-| confirm             | if true, need click the button to change value   | `boolean`                                       | false          |
-| confirm-text        | the text of confirm button                       | `string`                                        | 'OK'           |
-| multiple            | if true, multi-select date                       | `boolean`                                       | false          |
-| disabled            | disable the component                            | `boolean`                                       | false          |
-| disabled-date       | specify the date that cannot be selected         | `(date: Date, currentValue: Date[]) => boolean` | -              |
-| disabled-time       | specify the time that cannot be selected         | `(date: Date) => boolean`                       | -              |
-| append-to-body      | append the popup to body                         | `boolean`                                       | true           |
-| inline              | without input                                    | `boolean`                                       | false          |
-| input-class         | input classname                                  | `string`                                        | 'mx-input'     |
-| input-attr          | input attrs(eg: { name: 'date', id: 'foo'})      | `object`                                        | —              |
-| open                | open state of picker                             | `boolean`                                       | -              |
-| default-panel       | default panel of the picker                      | year\|month                                     | -              |
-| popup-style         | popup style                                      | `object`                                        | —              |
-| popup-class         | popup classes                                    |                                                 | —              |
-| shortcuts           | set shortcuts to select                          | `Array<{text, onClick}>`                        | -              |
-| title-format        | format of the tooltip in calendar cell           | [token](#token)                                 | 'YYYY-MM-DD'   |
-| partial-update      | whether update date when select year or month    | `boolean`                                       | false          |
-| range-separator     | text of range separator                          | `string`                                        | ' ~ '          |
-| show-week-number    | determine whether show week number               | `boolean`                                       | false          |
-| hour-step           | interval between hours in time picker            | 1 - 60                                          | 1              |
-| minute-step         | interval between minutes in time picker          | 1 - 60                                          | 1              |
-| second-step         | interval between seconds in time picker          | 1 - 60                                          | 1              |
-| hour-options        | custom hour column                               | `Array<number>`                                 | -              |
-| minute-options      | custom minute column                             | `Array<number>`                                 | -              |
-| second-options      | custom second column                             | `Array<number>`                                 | -              |
-| show-hour           | whether show hour column                         | `boolean`                                       | base on format |
-| show-minute         | whether show minute column                       | `boolean`                                       | base on format |
-| show-second         | whether show second column                       | `boolean`                                       | base on format |
-| use12h              | whether show ampm column                         | `boolean`                                       | base on format |
-| show-time-header    | whether show header of time picker               | `boolean`                                       | false          |
-| time-title-format   | format of the time header                        | [token](#token)                                 | 'YYYY-MM-DD'   |
-| time-picker-options | set fixed time list to select                    | [time-picker-options](#time-picker-options)     | null           |
-| prefix-class        | set prefix class                                 | `string`                                        | 'mx'           |
-| scroll-duration     | set the duration of scroll when hour is selected | `number`                                        | 100            |
+| Prop                  | Description                                           | Type                                            | Default        |
+|-----------------------|-------------------------------------------------------|-------------------------------------------------|----------------|
+| **append-to-element** | lets you choose what element to add the datepicker to | `string` (the `id` of the html element          | `null`         |
+| type                  | select the type of picker                             | date \|datetime\|year\|month\|time\|week        | 'date'         |
+| range                 | if true, pick the range date                          | `boolean`                                       | false          |
+| format                | to set the date format. similar to moment.js          | [token](#token)                                 | 'YYYY-MM-DD'   |
+| formatter             | use your own formatter, such as moment.js             | [object](#formatter)                            | -              |
+| value-type            | data type of the binding value                        | [value-type](#value-type)                       | 'date'         |
+| default-value         | default date of the calendar                          | `Date`                                          | new Date()     |
+| lang                  | override the default locale                           | `object`                                        |                |
+| placeholder           | input placeholder text                                | `string`                                        | ''             |
+| editable              | whether the input is editable                         | `boolean`                                       | true           |
+| clearable             | if false, don't show the clear icon                   | `boolean`                                       | true           |
+| confirm               | if true, need click the button to change value        | `boolean`                                       | false          |
+| confirm-text          | the text of confirm button                            | `string`                                        | 'OK'           |
+| multiple              | if true, multi-select date                            | `boolean`                                       | false          |
+| disabled              | disable the component                                 | `boolean`                                       | false          |
+| disabled-date         | specify the date that cannot be selected              | `(date: Date, currentValue: Date[]) => boolean` | -              |
+| disabled-time         | specify the time that cannot be selected              | `(date: Date) => boolean`                       | -              |
+| append-to-body        | append the popup to body                              | `boolean`                                       | true           |
+| inline                | without input                                         | `boolean`                                       | false          |
+| input-class           | input classname                                       | `string`                                        | 'mx-input'     |
+| input-attr            | input attrs(eg: { name: 'date', id: 'foo'})           | `object`                                        | —              |
+| open                  | open state of picker                                  | `boolean`                                       | -              |
+| default-panel         | default panel of the picker                           | year\|month                                     | -              |
+| popup-style           | popup style                                           | `object`                                        | —              |
+| popup-class           | popup classes                                         |                                                 | —              |
+| shortcuts             | set shortcuts to select                               | `Array<{text, onClick}>`                        | -              |
+| title-format          | format of the tooltip in calendar cell                | [token](#token)                                 | 'YYYY-MM-DD'   |
+| partial-update        | whether update date when select year or month         | `boolean`                                       | false          |
+| range-separator       | text of range separator                               | `string`                                        | ' ~ '          |
+| show-week-number      | determine whether show week number                    | `boolean`                                       | false          |
+| hour-step             | interval between hours in time picker                 | 1 - 60                                          | 1              |
+| minute-step           | interval between minutes in time picker               | 1 - 60                                          | 1              |
+| second-step           | interval between seconds in time picker               | 1 - 60                                          | 1              |
+| hour-options          | custom hour column                                    | `Array<number>`                                 | -              |
+| minute-options        | custom minute column                                  | `Array<number>`                                 | -              |
+| second-options        | custom second column                                  | `Array<number>`                                 | -              |
+| show-hour             | whether show hour column                              | `boolean`                                       | base on format |
+| show-minute           | whether show minute column                            | `boolean`                                       | base on format |
+| show-second           | whether show second column                            | `boolean`                                       | base on format |
+| use12h                | whether show ampm column                              | `boolean`                                       | base on format |
+| show-time-header      | whether show header of time picker                    | `boolean`                                       | false          |
+| time-title-format     | format of the time header                             | [token](#token)                                 | 'YYYY-MM-DD'   |
+| time-picker-options   | set fixed time list to select                         | [time-picker-options](#time-picker-options)     | null           |
+| prefix-class          | set prefix class                                      | `string`                                        | 'mx'           |
+| scroll-duration       | set the duration of scroll when hour is selected      | `number`                                        | 100            |
 
 #### Token
 
@@ -206,21 +217,23 @@ The `formatter` accepts an object to customize formatting.
 ```
 
 ```js
-data() {
-  return {
-    // Use moment.js instead of the default
-    momentFormat: {
-      //[optional] Date to String
-      stringify: (date) => {
-        return date ? moment(date).format('LL') : ''
-      },
-      //[optional]  String to Date
-      parse: (value) => {
-        return value ? moment(value, 'LL').toDate() : null
-      },
-      //[optional] getWeekNumber
-      getWeek: (date) => {
-        return // a number
+export default {
+  data() {
+    return {
+      // Use moment.js instead of the default
+      momentFormat: {
+        //[optional] Date to String
+        stringify: (date) => {
+          return date ? moment(date).format('LL') : ''
+        },
+        //[optional]  String to Date
+        parse: (value) => {
+          return value ? moment(value, 'LL').toDate() : null
+        },
+        //[optional] getWeekNumber
+        getWeek: (date) => {
+          return // a number
+        }
       }
     }
   }
@@ -266,8 +279,8 @@ The shortcuts for the range picker
 
 Set fixed time list to select;
 
-```js
-{start: '00:00', step:'00:30' , end: '23:30', format: 'HH:mm' }
+```json
+{"start": "00:00", "step":"00:30", "end": "23:30", "format": "HH:mm" }
 ```
 
 | Attribute | Description                          |
@@ -311,14 +324,15 @@ Set fixed time list to select;
 
 ## One-time Donations
 
-If you find this project useful, you can buy me a coffee
-
-[Paypal Me](https://www.paypal.me/mengxiong10)
-
-![donate](https://user-images.githubusercontent.com/14135808/83999111-a7947600-a994-11ea-84e9-9a215def4155.png)
+Special thanks to the original founder of this repository, here you can find his donation links :)
+> If you find this project useful, you can buy me a coffee
+> 
+> [Paypal Me](https://www.paypal.me/mengxiong10)
+> 
+> ![donate](https://user-images.githubusercontent.com/14135808/83999111-a7947600-a994-11ea-84e9-9a215def4155.png)
 
 ## License
 
-[MIT](https://github.com/mengxiong10/vue2-datepicker/blob/master/LICENSE)
+[MIT](https://github.com/RedNeath/vue2-datepicker-dialog/blob/master/LICENSE)
 
-Copyright (c) 2017-present xiemengxiong
+Copyright (c) 2017-present xiemengxiong & RedNeath

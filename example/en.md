@@ -4,6 +4,12 @@
 
 You can select or input a date, month, year, time or datetime
 
+<!-- Dialog -->
+
+### Dialog
+
+You can display the popup inside an official HTML `<dialog>` tag.
+
 <!-- ValueType -->
 
 ### ValueType

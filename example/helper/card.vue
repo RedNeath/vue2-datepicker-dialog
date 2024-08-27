@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import HighlightCode from './highlight-code';
+import HighlightCode from './highlight-code.vue';
 
 export default {
   name: 'DemoCard',
@@ -106,7 +106,6 @@ $border-color: #ebedf0;
     padding-left: 30px;
   }
   code {
-    margin: 0 1px;
     padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;
@@ -141,5 +140,18 @@ $border-color: #ebedf0;
 
 .card-code {
   border-top: 1px solid $border-color;
+}
+
+.card-dialog {
+  min-width: 45%;
+  min-height: 50%;
+  border: none;
+  border-radius: 5px;
+  padding-top: 0;
+}
+
+.card-dialog-header {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

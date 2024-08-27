@@ -30,6 +30,11 @@ export default {
       type: Boolean,
       default: true,
     },
+    appendToElement: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
   data() {
     return {
@@ -50,7 +55,9 @@ export default {
     },
   },
   mounted() {
-    if (this.appendToBody) {
+    if (this.appendToElement !== null) {
+      document.getElementById(this.appendToElement).appendChild(this.$el);
+    } else if (this.appendToBody) {
       document.body.appendChild(this.$el);
     }
     this._clickoutEvent = 'ontouchend' in document ? 'touchstart' : 'mousedown';
@@ -65,7 +72,7 @@ export default {
     window.addEventListener('resize', this._displayPopup);
   },
   beforeDestroy() {
-    if (this.appendToBody && this.$el.parentNode) {
+    if ((this.appendToBody || this.appendToElement !== null) && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     }
 
@@ -87,14 +94,17 @@ export default {
       if (!this.visible) return;
       const popup = this.$el;
       const relativeElement = this.$parent.$el;
-      const { appendToBody } = this;
+      const fixed = this.appendToBody || this.appendToElement !== null;
       if (!this._popupRect) {
         this._popupRect = getPopupElementSize(popup);
       }
       const { width, height } = this._popupRect;
-      const { left, top } = getRelativePosition(relativeElement, width, height, appendToBody);
-      this.left = left;
-      this.top = top;
+      const { left, top } = getRelativePosition(relativeElement, width, height, fixed);
+
+      if (this.appendToElement === null) {
+        this.left = left;
+        this.top = top;
+      }
     },
   },
 };

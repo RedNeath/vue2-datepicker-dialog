@@ -4,6 +4,7 @@ import fs from 'fs';
 import Container from './helper/container.vue';
 import Card from './helper/card.vue';
 import Basic from './demo/Basic.vue';
+import Dialog from './demo/Dialog.vue';
 import ValueType from './demo/ValueType.vue';
 import Range from './demo/Range.vue';
 import DisabledDateTime from './demo/DisabledDateTime.vue';
@@ -23,6 +24,11 @@ const components = [
     id: 'Basic',
     component: Basic,
     code: fs.readFileSync(`${__dirname}/demo/Basic.vue`, 'utf8'),
+  },
+  {
+    id: 'Dialog',
+    component: Dialog,
+    code: fs.readFileSync(`${__dirname}/demo/Dialog.vue`, 'utf8'),
   },
   {
     id: 'ValueType',
@@ -78,11 +84,11 @@ const components = [
 
 function transformMd(text) {
   const array = text.split(/\n(?=<!-)/);
-  const getId = s => {
+  const getId = (s) => {
     const result = s.match(/<!--\s*(\w+)\s*-->/);
     return result && result[1].trim();
   };
-  const getTitleAndDescription = s => {
+  const getTitleAndDescription = (s) => {
     const result = s.match(/<h.*?>(.*?)<\/h\d>/);
     if (!result) return null;
     const title = result[1];
@@ -93,7 +99,7 @@ function transformMd(text) {
     };
   };
   const result = {};
-  array.forEach(str => {
+  array.forEach((str) => {
     const id = getId(str);
     if (id) {
       result[id] = getTitleAndDescription(str);
@@ -143,7 +149,7 @@ const App = {
   },
   render(h) {
     const doc = docMap[this.lang] || docMap.en;
-    const menus = components.map(item => {
+    const menus = components.map((item) => {
       return {
         id: item.id,
         ...doc[item.id],
@@ -165,7 +171,7 @@ const App = {
           </button>
         </div>
         <div key={this.lang}>
-          {components.map(item => {
+          {components.map((item) => {
             const { component, id, code } = item;
             const props = {
               id,

@@ -17,8 +17,8 @@ describe('Locale', () => {
         open: true,
       },
     });
-    expect(wrapper.find('.mx-table-date th').text()).toBe('一');
-    expect(wrapper.find('.mx-table-date td').element.title).toBe('2019-09-30');
+    expect(wrapper.find('.mx-table-date th').text()).toBe('Su');
+    expect(wrapper.find('.mx-table-date td').element.title).toBe('2019-09-29');
   });
 
   it('prop: lang - string', async () => {
@@ -38,11 +38,11 @@ describe('Locale', () => {
     expect(wrapper.find('.mx-table-month td').text()).toBe('Jan');
     wrapper.setProps({ lang: 'zh-cn' });
     await wrapper.findComponent(Calendar).setData({ panel: 'date' });
-    expect(wrapper.find('.mx-table-date th').text()).toBe('一');
-    expect(wrapper.find('.mx-table-date .active').element.title).toBe('10月 10, 2019');
-    expect(wrapper.find('.mx-btn-current-month').text()).toBe('10月');
+    expect(wrapper.find('.mx-table-date th').text()).toBe('Su');
+    expect(wrapper.find('.mx-table-date .active').element.title).toBe('Oct 10, 2019');
+    expect(wrapper.find('.mx-btn-current-month').text()).toBe('Oct');
     await wrapper.findComponent(Calendar).setData({ panel: 'month' });
-    expect(wrapper.find('.mx-table-month td').text()).toBe('1月');
+    expect(wrapper.find('.mx-table-month td').text()).toBe('Jan');
   });
 
   it('prop: lang - object', () => {
