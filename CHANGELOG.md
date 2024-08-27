@@ -1,3 +1,10 @@
+# 1.0.0 (2024-08-27)
+
+### Features
+- Added support for datepickers within standard HTML dialog ([2230807](https://github.com/RedNeath/vue2-datepicker-dialog/commit/2230807e884238774c10f348c4589e8ffa2e994c))
+
+# Original repository changelog
+
 <a name="3.11.1"></a>
 ## [3.11.1](https://github.com/mengxiong10/vue2-datepicker/compare/v3.11.0...v3.11.1) (2022-12-01)
 

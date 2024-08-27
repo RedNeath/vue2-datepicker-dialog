@@ -1,3 +1,10 @@
+# 1.0.0 (2024-08-27)
+
+### 特点
+- 在标准 HTML 对话框中添加了对日期选择器的支持 ([2230807](https://github.com/RedNeath/vue2-datepicker-dialog/commit/2230807e884238774c10f348c4589e8ffa2e994c))
+
+# 原始版本库更新日志
+
 <a name="3.0.2"></a>
 
 ## [3.0.2](https://github.com/mengxiong10/vue2-datepicker/compare/v3.0.1...v3.0.2) (2019-11-14)
